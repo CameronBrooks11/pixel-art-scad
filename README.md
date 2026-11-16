@@ -82,7 +82,10 @@ Each pixel becomes the character whose colour is nearest in RGB; where two
 characters share a colour, the one listed first wins. Fully transparent pixels
 become spaces. One pixel of the image, after downscaling, is one cuboid, so a
 large image makes a slow model: the 115 x 115 example below takes about nine
-seconds to render.
+seconds to render with the Manifold backend, the default in OpenSCAD
+development snapshots. OpenSCAD 2021.01 renders with CGAL and did not
+finish that example in four minutes, so use a newer OpenSCAD for converted
+images.
 
 ## Examples
 
