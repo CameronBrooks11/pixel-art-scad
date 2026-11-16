@@ -1,4 +1,4 @@
-# pixelArtSCAD task runner
+# pixel-art-scad task runner
 
 set dotenv-load := false
 
