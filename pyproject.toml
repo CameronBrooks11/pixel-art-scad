@@ -1,5 +1,5 @@
 [project]
-name = "pixelartscad"
+name = "pixel-art-scad"
 version = "0.1.0"
 description = "OpenSCAD pixel art from character arrays, with a PNG converter"
 readme = "README.md"

@@ -1,4 +1,4 @@
-# pixelArtSCAD
+# pixel-art-scad
 
 An OpenSCAD library for 3D pixel art. A picture is a list of strings, one
 character per pixel, and a colormap says which colour each character is. A
@@ -8,8 +8,11 @@ Python script turns a PNG into such a list.
 
 ## Using the library
 
+Put this repository in your OpenSCAD libraries folder as `pixel-art-scad`,
+then:
+
 ```openscad
-use <pixel_art.scad>
+use <pixel-art-scad/pixel_art.scad>
 
 PixAlien = [
     "  G     G  ",
