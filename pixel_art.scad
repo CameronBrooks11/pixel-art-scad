@@ -1,6 +1,5 @@
 // pixel_art.scad
 include <colormap.scad> // Include the color map
-include <pix00.scad>    // Import the default pixel art
 
 Epsilon = 1 / 10000; // Small overlap so neighbouring pixels fuse into one solid
 
@@ -15,8 +14,9 @@ Epsilon = 1 / 10000; // Small overlap so neighbouring pixels fuse into one solid
 // The art lies in the XY plane and reads upright from above: the first
 // character of the last row sits at the origin.
 //------------------------------------------------------------
-module PixArt(H = Pix00, pixel = 10, height = 10)
+module PixArt(H, pixel = 10, height = 10)
 {
+    assert(is_list(H), "PixArt: H must be a list of strings");
     rows = len(H);
     for (i = [0:rows - 1], j = [0:len(H[i]) - 1])
     {

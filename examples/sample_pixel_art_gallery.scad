@@ -1,7 +1,7 @@
 // Hand-written patterns: each is a list of strings, one character per pixel.
-// The arrays are in examples/art/pix_Gallery.scad and pix00.scad.
+// The arrays are in examples/art/pix_Gallery.scad and examples/art/pix00.scad.
 use <../pixel_art.scad>
-include <../pix00.scad>
+include <art/pix00.scad>
 include <art/pix_Gallery.scad>
 
 // Which pattern to draw
