@@ -10,14 +10,16 @@ default:
 setup:
     uv sync
 
-# Format code (mutates working tree)
+# Format the Python with ruff and the .scad with topiary (mutates working tree)
 fmt:
     uv run ruff format .
     uv run ruff check --fix .
+    git ls-files -z '*.scad' | xargs -0 -r topiary format
 
 # Verify formatting (non-mutating)
 fmt-check:
     uv run ruff format --check .
+    git ls-files -z '*.scad' | xargs -0 -r -n1 topiary format --check
 
 # Run linters
 lint:
@@ -32,4 +34,5 @@ test: && render
 
 # Render every example to STL, failing on any OpenSCAD warning
 render:
-    @for f in examples/sample_*.scad; do echo "render $f"; log=$(openscad --hardwarnings --export-format binstl -o - "$f" 2>&1 >/dev/null) || { echo "$log"; exit 1; }; done
+    @# A failed assert leaves the exit status at 0, so the output decides.
+    @for f in examples/sample_*.scad; do echo "render $f"; log=$(openscad --hardwarnings --export-format binstl -o - "$f" 2>&1 >/dev/null); if [ $? -ne 0 ] || echo "$log" | grep -qE '^(WARNING|ERROR)'; then echo "$log"; exit 1; fi; done
