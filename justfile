@@ -34,4 +34,5 @@ test: && render
 
 # Render every example to STL, failing on any OpenSCAD warning
 render:
-    @for f in examples/sample_*.scad; do echo "render $f"; log=$(openscad --hardwarnings --export-format binstl -o - "$f" 2>&1 >/dev/null) || { echo "$log"; exit 1; }; done
+    @# A failed assert leaves the exit status at 0, so the output decides.
+    @for f in examples/sample_*.scad; do echo "render $f"; log=$(openscad --hardwarnings --export-format binstl -o - "$f" 2>&1 >/dev/null); if [ $? -ne 0 ] || echo "$log" | grep -qE '^(WARNING|ERROR)'; then echo "$log"; exit 1; fi; done
