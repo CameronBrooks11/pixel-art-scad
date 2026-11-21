@@ -10,14 +10,16 @@ default:
 setup:
     uv sync
 
-# Format code (mutates working tree)
+# Format the Python with ruff and the .scad with topiary (mutates working tree)
 fmt:
     uv run ruff format .
     uv run ruff check --fix .
+    git ls-files -z '*.scad' | xargs -0 -r topiary format
 
 # Verify formatting (non-mutating)
 fmt-check:
     uv run ruff format --check .
+    git ls-files -z '*.scad' | xargs -0 -r -n1 topiary format --check
 
 # Run linters
 lint:
